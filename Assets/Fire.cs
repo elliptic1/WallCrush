@@ -11,13 +11,18 @@ public class Fire : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.touchCount > 0)
+        if (Input.GetMouseButtonDown(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began)
-            {
-                rigidbody.AddForce(new Vector3(100, 0, 0));
-            }
+
+            GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            sphere.transform.position = new Vector3(950, 180, 81);
+            sphere.transform.localScale = new Vector3(10, 10, 10);
+            sphere.AddComponent("Rigidbody");
+            sphere.rigidbody.mass = 5;
+            sphere.rigidbody.useGravity = false;
+
+            sphere.rigidbody.AddForce(new Vector3(0, 0, 90000));
         }
-	
+
 	}
 }
